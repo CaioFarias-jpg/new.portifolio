@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090a08">
+  <meta name="description" content="Portfólio de Caio Farias — estudante de Desenvolvimento de Sistemas.">
+  <title>Caio Farias — Portfólio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lilita+One&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-background: #090a08;
+      --color-panel: #11130f;
+      --color-panel-raised: #171a14;
+      --color-cream: #e9dfbd;
+      --color-muted: #999987;
+      --color-green: #62ff68;
+      --color-line: rgba(233, 223, 189, 0.16);
+      --font-display: "Lilita One", "Arial Rounded MT Bold", sans-serif;
+      --font-body: "Space Grotesk", sans-serif;
+      --font-mono: "DM Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 28px 18px 60px;
+      color: var(--color-cream);
+      background: var(--color-background);
+      background-image: radial-gradient(ellipse at 50% 0%, rgba(98, 255, 104, 0.075), transparent 42%);
+      font-family: var(--font-body);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--color-green); outline-offset: 4px; }
+    .mono { font-family: var(--font-mono); }
+
+    .grain {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    }
+
+    .shell {
+      max-width: 1040px;
+      margin: auto;
+      border: 1px solid var(--color-line);
+      background: rgba(17, 19, 15, 0.94);
+      box-shadow: 0 24px 100px #000;
+    }
+
+    .topbar {
+      display: flex;
+      height: 44px;
+      align-items: center;
+      gap: 9px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--color-line);
+      background: #151711;
+    }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #4b4e43; }
+    .dot:first-child { background: var(--color-green); box-shadow: 0 0 10px #62ff6866; }
+    .tab { align-self: end; margin-left: 12px; padding: 7px 14px; border: 1px solid var(--color-line); border-bottom: 0; color: var(--color-cream); font: 11px var(--font-mono); }
+    .tab span, .top-status strong { color: var(--color-green); }
+    .top-status { margin-left: auto; color: var(--color-muted); font: 10px var(--font-mono); letter-spacing: 0.08em; }
+    .top-status strong { font-weight: 400; }
+    .content { padding: clamp(22px, 5vw, 54px); }
+
+    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center; padding: 14px 0 42px; }
+    .eyebrow, .command, .section-kicker, .meta, .status, .footer { font-family: var(--font-mono); }
+    .eyebrow { margin-bottom: 18px; color: var(--color-green); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+    h1 { color: var(--color-cream); font: clamp(56px, 10vw, 112px)/0.82 var(--font-display); letter-spacing: -0.035em; text-transform: uppercase; }
+    h1 .name-accent { display: block; color: var(--color-green); }
+    .hero-copy { max-width: 490px; margin-top: 24px; color: #b9b8a6; font-size: 15px; line-height: 1.8; }
+    .hero-copy strong { color: var(--color-cream); font-weight: 600; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 15px;
+      border: 1px solid var(--color-green);
+      color: var(--color-background);
+      background: var(--color-green);
+      font: 11px var(--font-mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: 0.2s;
+    }
+    .button:hover { transform: translateY(-2px); color: var(--color-green); background: transparent; }
+    .button.secondary { border-color: var(--color-line); color: var(--color-cream); background: transparent; }
+    .button.secondary:hover { border-color: var(--color-green); color: var(--color-green); }
+
+    .brand-mark { position: relative; display: grid; min-height: 230px; place-items: center; }
+    .orbit { position: relative; display: grid; width: min(100%, 280px); aspect-ratio: 1; transform: rotate(-14deg); place-items: center; border: 1px solid rgba(98, 255, 104, 0.35); border-radius: 50%; }
+    .orbit::before, .orbit::after { position: absolute; inset: 18px; border: 1px solid rgba(98, 255, 104, 0.22); border-radius: 50%; content: ""; }
+    .orbit::after { inset: 38px; border-color: rgba(233, 223, 189, 0.2); }
+    .slashes { display: flex; width: 105px; height: 120px; flex-direction: column; justify-content: center; gap: 8px; }
+    .slashes i { display: block; height: 8px; transform: skewY(24deg); border-radius: 20px; background: var(--color-green); }
+    .slashes i:nth-child(1), .slashes i:nth-child(5) { width: 55%; margin-left: 23%; }
+    .slashes i:nth-child(2), .slashes i:nth-child(4) { width: 85%; margin-left: 8%; }
+    .slashes i:nth-child(3) { width: 100%; }
+    .orbit-label { position: absolute; right: 0; bottom: 4px; color: var(--color-muted); font: 10px var(--font-mono); letter-spacing: 0.12em; }
+
+    .rule { height: 1px; margin: 4px 0 34px; background: var(--color-line); }
+    .section { margin-bottom: 38px; }
+    .command { display: flex; align-items: center; gap: 9px; margin-bottom: 18px; color: var(--color-muted); font-size: 11px; }
+    .command .prompt { color: var(--color-green); }
+    .command .cmd { color: var(--color-cream); }
+    .section-title { margin-bottom: 17px; font: 30px/1 var(--font-display); letter-spacing: 0.01em; text-transform: uppercase; }
+    .section-title em { color: var(--color-green); font-style: normal; }
+
+    .about-box { position: relative; padding: 21px 23px; border: 1px solid var(--color-line); background: var(--color-panel-raised); }
+    .about-box::before { position: absolute; top: -8px; right: 14px; padding: 0 7px; color: var(--color-green); background: var(--color-panel); content: "PROFILE.DATA"; font: 9px var(--font-mono); letter-spacing: 0.1em; }
+    .info-row { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 7px 0; font-size: 13px; }
+    .info-row .label { color: var(--color-muted); font: 11px var(--font-mono); text-transform: uppercase; }
+    .info-row .value { color: var(--color-cream); }
+    .info-row a { border-bottom: 1px solid transparent; color: var(--color-green); }
+    .info-row a:hover { border-color: var(--color-green); }
+    .bio { margin-top: 14px; padding-top: 15px; border-top: 1px solid var(--color-line); color: #b9b8a6; font-size: 14px; line-height: 1.8; }
+
+    .stack, .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stack-card { padding: 15px 17px; border: 1px solid var(--color-line); background: var(--color-panel-raised); }
+    .stack-card h3 { margin-bottom: 10px; color: var(--color-green); font: 10px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 5px 8px; border: 1px solid rgba(233, 223, 189, 0.2); color: var(--color-cream); font: 10px var(--font-mono); }
+    .tag.learning { border-color: rgba(98, 255, 104, 0.45); color: var(--color-green); }
+
+    .projects { gap: 12px; }
+    .project { display: flex; min-height: 190px; flex-direction: column; padding: 19px; border: 1px solid var(--color-line); background: var(--color-panel); transition: 0.2s; }
+    .project:hover { transform: translateY(-3px); border-color: var(--color-green); background: #151a13; }
+    .project-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 18px; color: var(--color-green); font: 10px var(--font-mono); }
+    .project h3 { margin-bottom: 8px; font: 25px var(--font-display); text-transform: uppercase; }
+    .project p { flex: 1; color: #aaa997; font-size: 13px; line-height: 1.65; }
+    .project .tags { margin-top: 16px; }
+    .project .tag { padding: 4px 6px; font-size: 9px; }
+
+    .edu { padding: 2px 0 2px 18px; border-left: 2px solid var(--color-green); }
+    .edu h3 { font: 23px var(--font-display); text-transform: uppercase; }
+    .edu .meta { margin: 5px 0 10px; color: var(--color-muted); font-size: 10px; }
+    .edu p { color: #b9b8a6; font-size: 13px; line-height: 1.7; }
+    .contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding: 22px; border: 1px solid rgba(98, 255, 104, 0.35); background: rgba(98, 255, 104, 0.035); }
+    .contact h2 { font: 30px var(--font-display); text-transform: uppercase; }
+    .contact p { margin-top: 5px; color: var(--color-muted); font-size: 12px; }
+    .footer { display: flex; justify-content: space-between; gap: 12px; padding-top: 28px; color: #737466; font-size: 9px; letter-spacing: 0.08em; }
+    .footer span:last-child { color: var(--color-green); }
+
+    @media (max-width: 700px) {
+      body { padding: 0; }
+      .shell { border-right: 0; border-left: 0; }
+      .content { padding: 25px 19px 35px; }
+      .hero { grid-template-columns: 1fr; padding-bottom: 30px; }
+      .brand-mark { min-height: 160px; }
+      .orbit { width: 160px; }
+      .slashes { transform: scale(0.7); }
+      .orbit-label { right: 8px; bottom: -5px; }
+      .stack, .projects { grid-template-columns: 1fr; }
+      .info-row { grid-template-columns: 115px 1fr; }
+      .top-status { font-size: 8px; }
+      .footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <i class="dot" aria-hidden="true"></i>
+      <i class="dot" aria-hidden="true"></i>
+      <i class="dot" aria-hidden="true"></i>
+      <div class="tab"><span>✳</span> caio-farias / portfolio</div>
+      <div class="top-status">SYSTEM <strong>● ONLINE</strong></div>
+    </header>
+
+    <div class="content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">✳ Portfólio pessoal / 2026</p>
+          <h1 id="hero-title">Caio <span class="name-accent">Farias.</span></h1>
+          <p class="hero-copy">Estudante de <strong>Desenvolvimento de Sistemas</strong>, interessado em construir experiências web e sistemas funcionais — do banco de dados à interface.</p>
+          <div class="hero-actions">
+            <a class="button" href="#projetos">Ver projetos <span>↘</span></a>
+            <a class="button secondary" href="mailto:caiovv1@outlook.com">Entrar em contato ↗</a>
+          </div>
+        </div>
+        <div class="brand-mark" aria-hidden="true">
+          <div class="orbit"><div class="slashes"><i></i><i></i><i></i><i></i><i></i></div></div>
+          <span class="orbit-label">CREATIVE / CODE / BUILD</span>
+        </div>
+      </section>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <section class="section" id="sobre" aria-labelledby="about-title">
+        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">whoami</span></div>
+        <h2 class="section-title" id="about-title">01 / <em>Sobre mim</em></h2>
+        <div class="about-box">
+          <div class="info-row"><span class="label">Nome</span><span class="value">Caio Vinicius de Souza Soares de Farias</span></div>
+          <div class="info-row"><span class="label">Foco</span><span class="value">Desenvolvimento Web / Sistemas</span></div>
+          <div class="info-row"><span class="label">Localização</span><span class="value">Campo Grande, MS · Brasil</span></div>
+          <div class="info-row"><span class="label">E-mail</span><span class="value"><a href="mailto:caiovv1@outlook.com">caiovv1@outlook.com</a></span></div>
+          <div class="info-row"><span class="label">GitHub</span><span class="value"><a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener noreferrer">github.com/CaioFarias-jpg ↗</a></span></div>
+          <div class="info-row"><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/caio-farias-459695293/" target="_blank" rel="noopener noreferrer">linkedin.com/in/caio-farias ↗</a></span></div>
+          <p class="bio">Atualmente curso Técnico em Desenvolvimento de Sistemas no Senac Hub Academy. Gosto de aprender na prática, explorar novas tecnologias e desenvolver soluções que unam organização, funcionalidade e uma interface bem construída.</p>
+        </div>
+      </section>
+
+      <section class="section" id="tecnologias" aria-labelledby="stack-title">
+        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">cat stack.conf</span></div>
+        <h2 class="section-title" id="stack-title">02 / <em>Stack &amp; ferramentas</em></h2>
+        <div class="stack">
+          <div class="stack-card"><h3>01 — Linguagens &amp; web</h3><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PHP</span></div></div>
+          <div class="stack-card"><h3>02 — Dados</h3><div class="tags"><span class="tag">MySQL</span><span class="tag">SQL</span></div></div>
+          <div class="stack-card"><h3>03 — Ferramentas</h3><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Figma</span></div></div>
+          <div class="stack-card"><h3>04 — Em aprendizado</h3><div class="tags"><span class="tag learning">JavaScript</span><span class="tag learning">Python</span><span class="tag learning">MVC</span></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="projetos" aria-labelledby="projects-title">
+        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">ls ./projetos --featured</span></div>
+        <h2 class="section-title" id="projects-title">03 / <em>Projetos em destaque</em></h2>
+        <div class="projects">
+          <a class="project" href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener noreferrer">
+            <div class="project-top"><span>CASE_001</span><span>↗ GITHUB</span></div>
+            <h3>Cyber Report</h3>
+            <p>Plataforma web para organizar informações e registros de atividades de segurança digital, desenvolvida no projeto de fábrica de software.</p>
+            <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">MVC</span></div>
+          </a>
+          <a class="project" href="https://github.com/CaioFarias-jpg/Site_Restaurante" target="_blank" rel="noopener noreferrer">
+            <div class="project-top"><span>CASE_002</span><span>↗ GITHUB</span></div>
+            <h3>Site Restaurante</h3>
+            <p>Projeto de desenvolvimento web para praticar estruturação de páginas, estilização e construção de interfaces.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </a>
+          <a class="project" href="https://github.com/CaioFarias-jpg/Desafio_01_Conserte_o_Sistema" target="_blank" rel="noopener noreferrer">
+            <div class="project-top"><span>CASE_003</span><span>↗ GITHUB</span></div>
+            <h3>Conserte o Sistema</h3>
+            <p>Exercício prático de análise e correção de código, trabalhando lógica e identificação de problemas.</p>
+            <div class="tags"><span class="tag">Lógica</span><span class="tag">JavaScript</span></div>
+          </a>
+          <a class="project" href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener noreferrer">
+            <div class="project-top"><span>CASE_004</span><span>↗ GITHUB</span></div>
+            <h3>Estudos &amp; experimentos</h3>
+            <p>Repositórios e pequenos projetos criados durante meus estudos de programação e desenvolvimento de sistemas.</p>
+            <div class="tags"><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">Git</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="formacao" aria-labelledby="education-title">
+        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">cat education.txt</span></div>
+        <h2 class="section-title" id="education-title">04 / <em>Formação</em></h2>
+        <div class="edu">
+          <h3>Técnico em Desenvolvimento de Sistemas</h3>
+          <div class="meta">SENAC HUB ACADEMY · CAMPO GRANDE, MS · EM ANDAMENTO</div>
+          <p>Formação com atividades práticas em desenvolvimento web, lógica de programação, banco de dados, versionamento e construção de sistemas.</p>
+        </div>
+      </section>
+
+      <section class="section" id="contato" aria-labelledby="contact-title">
+        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">./connect.sh</span></div>
+        <div class="contact">
+          <div><h2 id="contact-title">Vamos construir algo?</h2><p>Aberto a oportunidades de estágio e projetos de desenvolvimento.</p></div>
+          <a class="button" href="mailto:caiovv1@outlook.com">Fale comigo ↗</a>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 CAIO FARIAS — FEITO COM CURIOSIDADE.</span><span>STATUS: SEMPRE APRENDENDO ✳</span></footer>
+    </div>
+  </main>
+</body>
+</html>
