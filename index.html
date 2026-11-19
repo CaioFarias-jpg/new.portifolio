@@ -70,6 +70,8 @@
     .dot { width: 9px; height: 9px; border-radius: 50%; background: #4b4e43; }
     .dot:first-child { background: var(--color-green); box-shadow: 0 0 10px #62ff6866; }
     .tab { align-self: end; margin-left: 12px; padding: 7px 14px; border: 1px solid var(--color-line); border-bottom: 0; color: var(--color-cream); font: 11px var(--font-mono); }
+    .language-toggle { align-self: end; margin-left: -9px; padding: 7px 9px; border: 1px solid var(--color-line); border-bottom: 0; color: var(--color-cream); background: transparent; font: 11px var(--font-mono); cursor: pointer; transition: 0.2s; }
+    .language-toggle:hover, .language-toggle:focus-visible { border-color: var(--color-green); color: var(--color-green); outline: none; }
     .tab span, .top-status strong { color: var(--color-green); }
     .top-status { margin-left: auto; color: var(--color-muted); font: 10px var(--font-mono); letter-spacing: 0.08em; }
     .top-status strong { font-weight: 400; }
@@ -183,6 +185,7 @@
       <i class="dot" aria-hidden="true"></i>
       <i class="dot" aria-hidden="true"></i>
       <div class="tab"><span>✳</span> caio-farias / portfolio</div>
+      <button class="language-toggle" id="language-toggle" type="button" aria-label="Change language to English" lang="en">EN</button>
       <div class="top-status">SYSTEM <strong>● ONLINE</strong></div>
     </header>
 
@@ -192,10 +195,6 @@
           <p class="eyebrow">✳ Portfólio pessoal / 2026</p>
           <h1 id="hero-title">Caio <span class="name-accent">Farias.</span></h1>
           <p class="hero-copy">Estudante de <strong>Desenvolvimento de Sistemas</strong>, interessado em construir experiências web e sistemas funcionais — do banco de dados à interface.</p>
-          <div class="hero-actions">
-            <a class="button" href="#projetos">Ver projetos <span>↘</span></a>
-            <a class="button secondary" href="mailto:caiovv1@outlook.com">Entrar em contato ↗</a>
-          </div>
         </div>
         <div class="brand-mark" aria-hidden="true">
           <div class="orbit"><div class="slashes"><i></i><i></i><i></i><i></i><i></i></div></div>
@@ -271,16 +270,54 @@
         </div>
       </section>
 
-      <section class="section" id="contato" aria-labelledby="contact-title">
-        <div class="command"><span class="prompt">caio@portfolio:~$</span><span class="cmd">./connect.sh</span></div>
-        <div class="contact">
-          <div><h2 id="contact-title">Vamos construir algo?</h2><p>Aberto a oportunidades de estágio e projetos de desenvolvimento.</p></div>
-          <a class="button" href="mailto:caiovv1@outlook.com">Fale comigo ↗</a>
-        </div>
-      </section>
-
       <footer class="footer"><span>© 2026 CAIO FARIAS — FEITO COM CURIOSIDADE.</span><span>STATUS: SEMPRE APRENDENDO ✳</span></footer>
     </div>
   </main>
+  <script>
+    const languageToggle = document.getElementById("language-toggle");
+    let currentLanguage = "pt";
+    const translations = [
+      [".eyebrow", "Personal portfolio / 2026"],
+      [".hero-copy", "A <strong>Systems Development</strong> student interested in building web experiences and functional systems - from database to interface."],
+      ["#about-title", "01 / <em>About me</em>"],
+      ["#sobre .info-row:nth-of-type(1) .label", "Name"],
+      ["#sobre .info-row:nth-of-type(2) .label", "Focus"],
+      ["#sobre .info-row:nth-of-type(2) .value", "Web Development / Systems"],
+      ["#sobre .info-row:nth-of-type(3) .label", "Location"],
+      ["#sobre .info-row:nth-of-type(3) .value", "Campo Grande, MS - Brazil"],
+      [".bio", "I am currently studying Systems Development at Senac Hub Academy. I enjoy learning by doing, exploring new technologies, and building solutions that bring together organization, functionality, and a well-crafted interface."],
+      ["#stack-title", "02 / <em>Stack &amp; tools</em>"],
+      [".stack-card:nth-child(1) h3", "01 - Languages &amp; web"],
+      [".stack-card:nth-child(2) h3", "02 - Data"],
+      [".stack-card:nth-child(3) h3", "03 - Tools"],
+      [".stack-card:nth-child(4) h3", "04 - Currently learning"],
+      ["#projects-title", "03 / <em>Featured projects</em>"],
+      [".project:nth-child(1) p", "A web platform for organizing information and digital security activity records, developed as part of a software factory project."],
+      [".project:nth-child(2) h3", "Restaurant Website"],
+      [".project:nth-child(2) p", "A web development project to practice page structure, styling, and interface building."],
+      [".project:nth-child(3) h3", "Fix the System"],
+      [".project:nth-child(3) p", "A hands-on code analysis and debugging exercise focused on logic and identifying problems."],
+      [".project:nth-child(3) .tag", "Logic"],
+      [".project:nth-child(4) h3", "Studies &amp; experiments"],
+      [".project:nth-child(4) p", "Repositories and small projects created while studying programming and systems development."],
+      ["#education-title", "04 / <em>Education</em>"],
+      [".edu h3", "Systems Development Technician"],
+      [".edu .meta", "SENAC HUB ACADEMY - CAMPO GRANDE, MS - IN PROGRESS"],
+      [".edu p", "Hands-on training in web development, programming logic, databases, version control, and system building."],
+      [".footer span:first-child", "&copy; 2026 CAIO FARIAS - MADE WITH CURIOSITY."],
+      [".footer span:last-child", "STATUS: ALWAYS LEARNING"]
+    ];
+    const originals = new Map(translations.map(([selector]) => [selector, document.querySelector(selector)?.innerHTML]));
+    languageToggle.addEventListener("click", () => {
+      currentLanguage = currentLanguage === "pt" ? "en" : "pt";
+      translations.forEach(([selector, english]) => {
+        const element = document.querySelector(selector);
+        if (element) element.innerHTML = currentLanguage === "en" ? english : originals.get(selector);
+      });
+      document.documentElement.lang = currentLanguage === "en" ? "en" : "pt-BR";
+      languageToggle.textContent = currentLanguage === "en" ? "PT" : "EN";
+      languageToggle.setAttribute("aria-label", currentLanguage === "en" ? "Mudar idioma para portugues" : "Change language to English");
+    });
+  </script>
 </body>
 </html>
